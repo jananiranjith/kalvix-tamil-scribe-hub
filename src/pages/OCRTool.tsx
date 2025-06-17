@@ -139,17 +139,17 @@ const OCRTool = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-md border-b sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link to="/" className="flex items-center space-x-2 text-gray-700 hover:text-orange-600 transition-colors">
+          <Link to="/" className="flex items-center space-x-2 text-gray-700 hover:text-black transition-colors">
             <ArrowLeft className="h-5 w-5" />
             <span>Back to Home</span>
           </Link>
           <div className="flex items-center space-x-2">
-            <FileText className="h-8 w-8 text-orange-600" />
-            <h1 className="text-2xl font-bold text-orange-600">OCR Tool</h1>
+            <FileText className="h-8 w-8 text-black" />
+            <h1 className="text-2xl font-bold text-black">OCR Tool</h1>
           </div>
         </div>
       </header>
@@ -158,7 +158,7 @@ const OCRTool = () => {
         <div className="max-w-4xl mx-auto">
           {/* Title Section */}
           <div className="text-center mb-8">
-            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-orange-600 to-blue-600 bg-clip-text text-transparent">
+            <h2 className="text-4xl font-bold mb-4 text-black">
               Tamil OCR Text Extraction
             </h2>
             <p className="text-xl text-gray-600">
@@ -168,9 +168,9 @@ const OCRTool = () => {
 
           <div className="grid lg:grid-cols-2 gap-8">
             {/* Upload Section */}
-            <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
+            <Card className="border-2 border-gray-200 shadow-xl bg-white">
               <CardHeader>
-                <CardTitle className="text-2xl text-orange-700">File Upload</CardTitle>
+                <CardTitle className="text-2xl text-black">File Upload</CardTitle>
                 <CardDescription>
                   Drag and drop or click to upload JPG, PNG, JPEG, or PDF files
                 </CardDescription>
@@ -181,18 +181,18 @@ const OCRTool = () => {
                   {...getRootProps()}
                   className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all duration-300 ${
                     isDragActive 
-                      ? 'border-orange-500 bg-orange-50' 
-                      : 'border-gray-300 hover:border-orange-400 hover:bg-orange-25'
+                      ? 'border-black bg-gray-50' 
+                      : 'border-gray-300 hover:border-gray-600 hover:bg-gray-50'
                   }`}
                 >
                   <input {...getInputProps()} />
-                  <Upload className="h-12 w-12 text-orange-500 mx-auto mb-4" />
+                  <Upload className="h-12 w-12 text-gray-600 mx-auto mb-4" />
                   {isDragActive ? (
-                    <p className="text-orange-600 font-medium">Drop the files here...</p>
+                    <p className="text-black font-medium">Drop the files here...</p>
                   ) : (
                     <div>
                       <p className="text-gray-600 mb-2">
-                        Drag & drop files here, or <span className="text-orange-600 font-medium">browse</span>
+                        Drag & drop files here, or <span className="text-black font-medium">browse</span>
                       </p>
                       <p className="text-sm text-gray-500">
                         Supported formats: JPG, PNG, JPEG, PDF
@@ -210,9 +210,9 @@ const OCRTool = () => {
                         <div key={index} className="flex items-center justify-between bg-gray-50 p-2 rounded">
                           <div className="flex items-center space-x-2">
                             {file.type.startsWith('image/') ? (
-                              <Image className="h-4 w-4 text-orange-500" />
+                              <Image className="h-4 w-4 text-gray-600" />
                             ) : (
-                              <File className="h-4 w-4 text-orange-500" />
+                              <File className="h-4 w-4 text-gray-600" />
                             )}
                             <span className="text-sm truncate">{file.name}</span>
                           </div>
@@ -240,7 +240,7 @@ const OCRTool = () => {
                     value={pageCount}
                     onChange={(e) => setPageCount(e.target.value)}
                     placeholder="Enter number of pages"
-                    className="border-orange-200 focus:border-orange-500"
+                    className="border-gray-300 focus:border-black"
                   />
                 </div>
 
@@ -248,7 +248,7 @@ const OCRTool = () => {
                 <div className="space-y-2">
                   <Label>Output Format</Label>
                   <Select value={outputFormat} onValueChange={setOutputFormat}>
-                    <SelectTrigger className="border-orange-200 focus:border-orange-500">
+                    <SelectTrigger className="border-gray-300 focus:border-black">
                       <SelectValue placeholder="Select output format" />
                     </SelectTrigger>
                     <SelectContent>
@@ -263,7 +263,7 @@ const OCRTool = () => {
                 <Button
                   onClick={processFiles}
                   disabled={isProcessing || uploadedFiles.length === 0}
-                  className="w-full bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800"
+                  className="w-full bg-black text-white hover:bg-gray-800"
                 >
                   {isProcessing ? (
                     <>
@@ -281,9 +281,9 @@ const OCRTool = () => {
             </Card>
 
             {/* Results Section */}
-            <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
+            <Card className="border-2 border-gray-200 shadow-xl bg-white">
               <CardHeader>
-                <CardTitle className="text-2xl text-blue-700">Extracted Text</CardTitle>
+                <CardTitle className="text-2xl text-black">Extracted Text</CardTitle>
                 <CardDescription>
                   Your extracted Tamil text will appear here
                 </CardDescription>
@@ -298,7 +298,7 @@ const OCRTool = () => {
                     </div>
                     <Button
                       onClick={downloadExtractedText}
-                      className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
+                      className="w-full bg-gray-800 text-white hover:bg-gray-900"
                     >
                       <Download className="mr-2 h-4 w-4" />
                       Download as {outputFormat.toUpperCase()}
