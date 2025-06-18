@@ -36,7 +36,7 @@ const Index = () => {
         <div className="container mx-auto text-center relative z-10">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-6xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent leading-tight">
-              தமிழ் கல்வியின் எதிர்காலம்
+              KalviX
             </h2>
             <p className="text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed max-w-3xl mx-auto">
               Tamil Nadu students' ultimate study companion with AI-powered Edubot and advanced OCR technology
@@ -138,7 +138,7 @@ const Index = () => {
                 </div>
                 <Link to="/ocr" className="block w-full">
                   <Button className="w-full bg-gray-200 text-black hover:bg-white mt-8 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
-                    Try OCR Tool
+                    Coming soon 
                   </Button>
                 </Link>
               </CardContent>
