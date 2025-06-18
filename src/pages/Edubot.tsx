@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
@@ -209,13 +208,12 @@ const Edubot = () => {
         <div className="max-w-4xl mx-auto">
           <div className="flex items-end space-x-3">
             <div className="flex-1 relative">
-              <Input
+              <Textarea
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Ask me anything about Tamil subject..."
                 className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 pr-12 py-3 text-sm resize-none min-h-[48px]"
-                multiline
               />
             </div>
             <Button
