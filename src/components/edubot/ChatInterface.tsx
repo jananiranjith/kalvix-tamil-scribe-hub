@@ -1,10 +1,11 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Bot, ArrowLeft } from "lucide-react";
+import { Bot, ArrowLeft, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 import MessageItem from './MessageItem';
 import ChatInput from './ChatInput';
+import NotesPanel from './NotesPanel';
 
 interface Message {
   id: string;
@@ -32,6 +33,8 @@ const ChatInterface = ({
   onKeyPress, 
   onBackToSelection 
 }: ChatInterfaceProps) => {
+  const [isNotesOpen, setIsNotesOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white flex flex-col">
       {/* Header */}
@@ -54,11 +57,22 @@ const ChatInterface = ({
               <p className="text-sm text-gray-300">Class {selectedClass} Tamil Assistant</p>
             </div>
           </div>
-          <Link to="/">
-            <Button variant="outline" size="sm" className="border-gray-600 text-white hover:bg-white hover:text-black">
-              Exit Chat
+          <div className="flex items-center space-x-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsNotesOpen(!isNotesOpen)}
+              className="border-gray-600 text-white hover:bg-white hover:text-black"
+            >
+              <FileText className="h-4 w-4 mr-2" />
+              Notes
             </Button>
-          </Link>
+            <Link to="/">
+              <Button variant="outline" size="sm" className="border-gray-600 text-white hover:bg-white hover:text-black">
+                Exit Chat
+              </Button>
+            </Link>
+          </div>
         </div>
       </header>
 
@@ -77,6 +91,12 @@ const ChatInterface = ({
         setInputMessage={setInputMessage}
         onSendMessage={onSendMessage}
         onKeyPress={onKeyPress}
+      />
+
+      {/* Notes Panel */}
+      <NotesPanel
+        isOpen={isNotesOpen}
+        onClose={() => setIsNotesOpen(false)}
       />
     </div>
   );
