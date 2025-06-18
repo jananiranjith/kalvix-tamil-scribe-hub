@@ -21,7 +21,7 @@ const Edubot = () => {
       setChatStarted(true);
       const welcomeMessage: Message = {
         id: '1',
-        content: `Hello! I'm your Tamil subject assistant for Class ${selectedClass}. I'm here to help you with Tamil literature, grammar, poetry, and any other Tamil subject questions. How can I assist you today?`,
+        content: `வணக்கம், நான் உங்களுக்கு எப்படி உதவ முடியும்?`,
         sender: 'bot',
         timestamp: new Date()
       };
@@ -40,7 +40,7 @@ const Edubot = () => {
 
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
-        content: "I'm processing your question about Tamil subject. This is a demo response - in the actual implementation, I would provide detailed assistance with your Tamil studies including explanations, examples, and practice questions.",
+        content: "தமிழ் பாடம் பற்றிய உங்கள் கேள்வியை நான் செயலாக்குகிறேன்.",
         sender: 'bot',
         timestamp: new Date()
       };
