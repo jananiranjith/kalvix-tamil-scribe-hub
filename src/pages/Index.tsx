@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookOpen, FileText, GraduationCap, Zap, Users, Star, ArrowRight } from "lucide-react";
@@ -42,11 +41,13 @@ const Index = () => {
               Tamil Nadu students' ultimate study companion with AI-powered Edubot and advanced OCR technology
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Button size="lg" className="bg-white text-black hover:bg-gray-200 text-lg px-10 py-6 shadow-xl hover:shadow-2xl transition-all duration-300">
-                <BookOpen className="mr-3 h-6 w-6" />
-                Try Edubot
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <Link to="/edubot">
+                <Button size="lg" className="bg-white text-black hover:bg-gray-200 text-lg px-10 py-6 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <BookOpen className="mr-3 h-6 w-6" />
+                  Try Edubot
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
               <Link to="/ocr">
                 <Button size="lg" variant="outline" className="border-2 border-gray-600 text-white hover:bg-white hover:text-black text-lg px-10 py-6 shadow-xl hover:shadow-2xl transition-all duration-300">
                   <FileText className="mr-3 h-6 w-6" />
@@ -100,9 +101,11 @@ const Index = () => {
                     <span className="font-medium">Exam preparation & practice tests</span>
                   </div>
                 </div>
-                <Button className="w-full bg-white text-black hover:bg-gray-200 mt-8 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
-                  Start Learning with Edubot
-                </Button>
+                <Link to="/edubot" className="block w-full">
+                  <Button className="w-full bg-white text-black hover:bg-gray-200 mt-8 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
+                    Start Learning with Edubot
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
 
