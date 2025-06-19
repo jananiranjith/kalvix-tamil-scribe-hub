@@ -3,9 +3,8 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
-// https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "/kalvix-tamil-scribe-hub/", // 👈 REQUIRED for GitHub Pages
+  base: "/kalvix-tamil-scribe-hub/", // 👈 this is the MOST important line
   server: {
     host: "::",
     port: 8080,
