@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://jananiranjith.github.io/kalvix-tamil-scribe-hub",
   "scripts": {
+    "build:dev": "vite build --mode development",
     "dev": "vite",
     "build": "vite build",
     "predeploy": "npm run build",
