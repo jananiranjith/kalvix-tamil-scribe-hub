@@ -1,103 +1,94 @@
 
-import React, { useState } from 'react';
-import { Button } from "@/components/ui/button";
-import { Bot, ArrowLeft, FileText } from "lucide-react";
-import { Link } from "react-router-dom";
+import React, { useState, useRef, useEffect } from 'react';
 import MessageItem from './MessageItem';
 import ChatInput from './ChatInput';
-import NotesPanel from './NotesPanel';
+import { Bot, User } from 'lucide-react';
 
-interface Message {
+export interface Message {
   id: string;
-  content: string;
+  text: string;
   sender: 'user' | 'bot';
   timestamp: Date;
 }
 
-interface ChatInterfaceProps {
-  selectedClass: string;
-  messages: Message[];
-  inputMessage: string;
-  setInputMessage: (value: string) => void;
-  onSendMessage: () => void;
-  onKeyPress: (e: React.KeyboardEvent) => void;
-  onBackToSelection: () => void;
-}
+const ChatInterface = () => {
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: '1',
+      text: 'வணக்கம்! நான் உங்கள் தமிழ் கல்வி உதவியாளன். உங்களுக்கு எப்படி உதவ முடியும்?',
+      sender: 'bot',
+      timestamp: new Date(),
+    },
+  ]);
+  const [isLoading, setIsLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-const ChatInterface = ({ 
-  selectedClass, 
-  messages, 
-  inputMessage, 
-  setInputMessage, 
-  onSendMessage, 
-  onKeyPress, 
-  onBackToSelection 
-}: ChatInterfaceProps) => {
-  const [isNotesOpen, setIsNotesOpen] = useState(false);
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const handleSendMessage = async (text: string) => {
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      text,
+      sender: 'user',
+      timestamp: new Date(),
+    };
+
+    setMessages(prev => [...prev, userMessage]);
+    setIsLoading(true);
+
+    // Simulate bot response
+    setTimeout(() => {
+      const botMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: `நீங்கள் கேட்ட "${text}" பற்றி விளக்கம் தருகிறேன். இது ஒரு மாதிரி பதில். உண்மையான AI integration செய்யப்படும்போது இங்கே சரியான பதில் வரும்.`,
+        sender: 'bot',
+        timestamp: new Date(),
+      };
+      setMessages(prev => [...prev, botMessage]);
+      setIsLoading(false);
+    }, 1000);
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white flex flex-col">
-      {/* Header */}
-      <header className="bg-black/90 backdrop-blur-md border-b border-gray-800 sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={onBackToSelection}
-              className="text-gray-300 hover:text-white"
-            >
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
-            <div className="w-8 h-8 bg-gradient-to-br from-white to-gray-300 rounded-lg flex items-center justify-center">
-              <Bot className="h-5 w-5 text-black" />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-white">Edubot</h1>
-              <p className="text-sm text-gray-300">Class {selectedClass} Tamil Assistant</p>
-            </div>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setIsNotesOpen(!isNotesOpen)}
-              className="border-gray-600 text-white hover:bg-white hover:text-black"
-            >
-              <FileText className="h-4 w-4 mr-2" />
-              Notes
-            </Button>
-            <Link to="/">
-              <Button variant="outline" size="sm" className="border-gray-600 text-white hover:bg-white hover:text-black">
-                Exit Chat
-              </Button>
-            </Link>
-          </div>
+    <div className="flex flex-col h-full bg-white rounded-lg shadow-lg">
+      <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-t-lg">
+        <div className="flex items-center gap-2">
+          <Bot className="w-6 h-6" />
+          <h2 className="text-lg font-semibold">தமிழ் கல்வி உதவியாளன்</h2>
         </div>
-      </header>
-
-      {/* Chat Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        <div className="max-w-4xl mx-auto">
-          {messages.map((message) => (
-            <MessageItem key={message.id} message={message} />
-          ))}
+        <div className="flex items-center gap-1 text-sm opacity-90">
+          <User className="w-4 h-4" />
+          <span>ஆன்லைன்</span>
         </div>
       </div>
 
-      {/* Input Area */}
-      <ChatInput
-        inputMessage={inputMessage}
-        setInputMessage={setInputMessage}
-        onSendMessage={onSendMessage}
-        onKeyPress={onKeyPress}
-      />
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+        {messages.map((message) => (
+          <MessageItem key={message.id} message={message} />
+        ))}
+        {isLoading && (
+          <div className="flex justify-start">
+            <div className="bg-gray-200 rounded-lg px-4 py-2 max-w-xs animate-pulse">
+              <div className="flex space-x-1">
+                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+              </div>
+            </div>
+          </div>
+        )}
+        <div ref={messagesEndRef} />
+      </div>
 
-      {/* Notes Panel */}
-      <NotesPanel
-        isOpen={isNotesOpen}
-        onClose={() => setIsNotesOpen(false)}
-      />
+      <div className="border-t border-gray-200 p-4 bg-white rounded-b-lg">
+        <ChatInput onSendMessage={handleSendMessage} disabled={isLoading} />
+      </div>
     </div>
   );
 };
