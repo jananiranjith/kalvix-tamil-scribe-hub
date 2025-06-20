@@ -43,7 +43,7 @@ const Index = () => {
         <div className="container mx-auto text-center relative z-10">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-6xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent leading-tight">
-             கல்விX
+             Learn, grow, achieve.
             </h2>
             <p className="text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed max-w-3xl mx-auto">
              AI-இயக்கப்படும் Edubot மற்றும் மேம்பட்ட OCR தொழில்நுட்பத்துடன் கூடிய தமிழ்நாடு மாணவர்களின் உறுதிப் படிப்புத் துணை.
